@@ -9,21 +9,22 @@ window.onload = function () {
     let currentPlayer = 0;
     var stateOfGame = board.children.length; //keeps track of tiles
     var nextPlayer;
-    var XorO;
 
     for (var index = 0; index < stateOfGame; index++) {
         nextPlayer = board.children[index];
-        nextPlayer.addEventListener('click', tileClick, {once:true});
+        nextPlayer.addEventListener('click', tileClick);
     }
     
     function tileClick() {
-        this.textContent = options[currentPlayer];
-        this.classList.add(options[currentPlayer]);
-        currentPlayer = currentPlayer >= options.length - 1 ? 0 : currentPlayer + 1; //condition ? exprIfTrue : exprIfFalse
+        if (this.textContent == "") { //prevents the tiles from changing players
+            this.textContent = options[currentPlayer];
+            this.classList.add(options[currentPlayer]);
+        }
         if (checkWinner(squares)) {
             updateWinner.classList.add('you-won');
-            updateWinner.innerHTML = "Congratulations! ${XorO} is the Winner!";
+            updateWinner.innerHTML = `Congratulations! ${options[currentPlayer]} is the Winner!`;
         }
+        currentPlayer = currentPlayer >= options.length - 1 ? 0 : currentPlayer + 1; //condition ? exprIfTrue : exprIfFalse
     }
 
 // Part 3
@@ -55,11 +56,7 @@ window.onload = function () {
             if (squares[comb[0]].textContent == squares[comb[1]].textContent && 
                 squares[comb[1]].textContent == squares[comb[2]].textContent &&
                 squares[comb[0]].textContent != "")
-                if (squares[comb[0,1,2]] === 'X') {
-                    XorO = 'X';
-                XorO = 'O'
-                }
-                {return true;}
+                {return true;} // add some comments here 
         } {return false;}
     }
 
@@ -67,7 +64,11 @@ window.onload = function () {
     const refreshBtn = document.querySelector('.btn');
     refreshBtn.addEventListener('click', e => {
         e.preventDefault();
-        document.querySelectorAll('#board div').forEach(square => square.innerHTML = "");
+        document.querySelectorAll('#board div').forEach(square => {
+            square.innerHTML = "";
+            square.className = 'square'});
+            //square.classList.remove("X");
+            //square.classList.remove('O')}); 
         updateWinner.classList.remove('you-won');
         updateWinner.textContent = "Move your mouse over a square and click to play an X or an O.";
         //console.log("button clicked!");
