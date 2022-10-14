@@ -55,9 +55,11 @@ window.onload = function () {
         for (let comb of winningConditions) {
             if (squares[comb[0]].textContent == squares[comb[1]].textContent && 
                 squares[comb[1]].textContent == squares[comb[2]].textContent &&
-                squares[comb[0]].textContent != "")
-                {return true;} 
-        } {return false;}
+                squares[comb[0]].textContent != "") {
+                    return true;
+                } 
+        } 
+        return false;
     }
 
 // Part 5
