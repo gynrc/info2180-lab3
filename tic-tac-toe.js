@@ -56,7 +56,7 @@ window.onload = function () {
             if (squares[comb[0]].textContent == squares[comb[1]].textContent && 
                 squares[comb[1]].textContent == squares[comb[2]].textContent &&
                 squares[comb[0]].textContent != "")
-                {return true;} // add some comments here 
+                {return true;} 
         } {return false;}
     }
 
